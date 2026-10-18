@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUBARU THE SUPREMACY GENERAL</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}
+body{background:#000;color:#fff;overflow:hidden}
+.video-bg{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:-1}
+.stealth{position:fixed;top:0;left:0;width:100%;z-index:20;background:rgba(0,0,0,0.25);backdrop-filter:blur(2px);border-bottom:1px solid rgba(199,171,108,0.25);padding:12px;text-align:center}
+.stealth h1{color:#c7ab6c;font-size:14px;font-weight:900;letter-spacing:1px;line-height:1.3;cursor:pointer;user-select:none}
+.codeBox{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;border:1px solid #c7ab6c;border-radius:16px;padding:20px;width:90%;max-width:300px;display:none;z-index:100;text-align:center}
+.codeBox input{width:100%;background:#000;border:1px solid #333;border-radius:10px;padding:12px;color:#c7ab6c;text-align:center;font-size:16px;outline:none;margin-top:10px}
+.codeBox button{width:100%;margin-top:10px;background:#c7ab6c;color:#000;border:none;border-radius:10px;padding:11px;font-weight:900;cursor:pointer}
+.main{display:none;max-width:600px;margin:auto;padding:0 12px 100px;max-height:100vh;overflow:auto;position:relative;z-index:10}
+.top{position:sticky;top:0;z-index:15;background:rgba(10,10,10,0.65);backdrop-filter:blur(10px);border-bottom:1px solid #222;padding:12px;text-align:center}
+.top h1{color:#c7ab6c;font-size:12px;font-weight:900}
+.content{padding:12px;background:rgba(8,8,8,0.45);border-radius:0 0 16px 16px}
+.numCard{background:rgba(20,20,20,0.55);border:1px solid #c7ab6c55;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.numCard .num{font-size:17px;font-weight:900;display:flex;gap:8px}
+.numCard input{background:#000;border:1px solid #c7ab6c;border-radius:8px;color:#c7ab6c;padding:8px 10px;width:180px;display:none}
+.btnEdit{background:#c7ab6c;color:#000;border:none;border-radius:20px;padding:7px 14px;font-size:11px;font-weight:800;cursor:pointer}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tab{flex:1;padding:11px;border-radius:10px;text-align:center;font-weight:800;font-size:12px;cursor:pointer;border:1px solid #2a2a2a}
+.tab.active{background:#c7ab6c;color:#000}
+.tab.inactive{background:rgba(22,22,22,0.6);color:#c7ab6c}
+.desc{background:rgba(17,17,17,0.6);border-left:3px solid #c7ab6c;border-radius:0 12px 12px 0;padding:12px;font-size:12px;text-transform:uppercase;color:#ccc;margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.carreau{background:rgba(19,19,19,0.55);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:12px;backdrop-filter:blur(6px)}
+.carreau h3{color:#c7ab6c;font-size:11px;margin-bottom:8px}
+.mail-row{background:rgba(10,10,10,0.7);border:1px solid #1f1f1f;border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.mail-row span{font-size:11px;color:#c7ab6c;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btnCopy{background:#1e1c14;border:1px solid #3a3420;color:#c7ab6c;border-radius:16px;padding:4px 10px;font-size:10px;font-weight:700;cursor:pointer}
+.textArea{width:100%;background:rgba(10,10,10,0.7);border:1px solid #222;border-radius:10px;padding:10px;color:#ddd;font-size:12px;min-height:68px;resize:none;outline:none}
+.selectBox{width:100%;background:rgba(10,10,10,0.7);border:1px solid #222;border-radius:10px;padding:9px;color:#fff;font-size:12px;margin-bottom:6px}
+.btnMain{width:100%;background:#c7ab6c;color:#000;border:none;border-radius:10px;padding:11px;font-weight:900;font-size:12px;cursor:pointer;margin-top:8px}
+.assist{background:linear-gradient(135deg,rgba(15,26,15,0.7),rgba(19,19,19,0.7));border:1px solid #2a5a2a;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px;margin-top:8px;cursor:pointer}
+.assistIcon{width:38px;height:38px;background:#25D366;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#c7ab6c;color:#000;padding:10px 18px;border-radius:20px;font-weight:800;display:none;z-index:200;font-size:12px}
+.sonBtn{margin-top:8px;background:rgba(199,171,108,0.15);border:1px solid #c7ab6c;color:#c7ab6c;border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<video class="video-bg" id="bgVideo" autoplay muted loop playsinline>
+<source src="https://files.catbox.moe/34n6m6.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+<div class="stealth" id="stealth">
+<h1 id="secretName">SUBARU THE SUPREMACY GENERAL OF THE SUPREMACY VORAX EMPIRE</h1>
+<button class="sonBtn" id="sonBtn" onclick="toggleSon()">🔇 SON OFF</button>
+</div>
+<div class="codeBox" id="codeBox">
+<h3 style="color:#c7ab6c;font-size:13px">🔐 CODE IMPERIAL</h3>
+<input id="codeInput" placeholder="VORAX2019" type="password">
+<button onclick="checkCode()">DÉVERROUILLER</button>
+<button onclick="closeCode()" style="background:#222;color:#fff">Fermer</button>
+</div>
+<div class="main" id="main">
+<div class="top"><h1>SUBARU THE SUPREMACY GENERAL</h1><button class="sonBtn" onclick="toggleSon()" id="sonBtn2">🔇 SON OFF</button></div>
+<div class="content">
+<div class="numCard"><div><div style="font-size:10px;color:#888">NUMÉRO CIBLE</div><div class="num"><span id="displayNum">+2250501021940</span><input id="editNum" value="+2250501021940" onblur="saveNum()"></div></div><button class="btnEdit" onclick="toggleEdit()">✏️ Modifier</button></div>
+<div class="tabs"><div class="tab active" id="tABUSE" onclick="setType('ABUSE')">ABUSE</div><div class="tab inactive" id="tSCAM" onclick="setType('SCAM')">SCAM</div><div class="tab inactive" id="tSPAM" onclick="setType('SPAM')">SPAM</div></div>
+<div class="desc" id="desc">PORNOGRAPHIQUES, DES IMAGES DE MUTILATION ET QUI LANCE SOUVENT DES APPELS VIDEO SANS CONSENTEMENT.</div>
+<div class="grid2">
+<div class="carreau"><h3>📧 Mails (11)</h3><div id="mailList"></div></div>
+<div class="carreau"><h3>📝 Texte Signalement</h3><select class="selectBox" id="reasonSel"><option>🔞 Porn spam without consent</option><option>📵 Spam sans consentement</option></select><textarea class="textArea" id="text1">Spam sans consentement - contenu illégal.</textarea><button class="btnMain" onclick="copyText1()">📋 Copier</button></div>
+</div>
+<div class="grid2">
+<div class="carreau"><h3>📞 Texte Contact</h3><textarea class="textArea" id="text2">Bonjour équipe WhatsApp, je signale ce numéro abusif VORAX.</textarea><button class="btnMain" onclick="copyText2()">📋 Copier</button></div>
+<div class="carreau"><h3>💬 Assistance</h3><div class="assist" onclick="openWA()"><div class="assistIcon">💬</div><div><div style="font-size:12px;font-weight:800">Général Subaru</div><div style="font-size:11px" id="waNum">+225 05 01 02 19 40</div></div></div><button class="btnMain" style="background:#25D366;color:#fff" onclick="openWA()">WhatsApp</button></div>
+</div>
+<div style="text-align:center;margin-top:20px"><button onclick="lockAgain()" style="background:#222;color:#666;border:1px solid #333;border-radius:20px;padding:8px 16px;font-size:11px;cursor:pointer">🔒 Verrouiller</button></div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let currentType='ABUSE';let SECRET_CODE='VORAX2019';let sonOn=false;
+let data={number:'+2250501021940',abuse:'PORNOGRAPHIQUES, DES IMAGES DE MUTILATION ET QUI LANCE SOUVENT DES APPELS VIDEO SANS CONSENTEMENT.',scam:'ARNAQUES FINANCIERES, PHISHING.',spam:'SPAM REPETITIF.',mails:'abuse@whatsapp.com,support@whatsapp.com,grievance_officer_wa@support.whatsapp.com,smb@support.whatsapp.com,businesscomplaints@support.whatsapp.com,ip@whatsapp.com,appeals@whatsapp.com,privacy@whatsapp.com,legal@support.whatsapp.com,android@support.whatsapp.com,iphone@support.whatsapp.com',wa:'https://wa.me/2250501021940'};
+let clicks=0;document.getElementById('secretName').addEventListener('click',()=>{clicks++;if(clicks>=5){document.getElementById('codeBox').style.display='block';clicks=0;}setTimeout(()=>{if(clicks>0&&clicks<5)clicks=0;},3000);});
+function toggleSon(){let v=document.getElementById('bgVideo');sonOn=!sonOn;v.muted=!sonOn;let t=sonOn?'🔊 SON ON':'🔇 SON OFF';document.getElementById('sonBtn').innerText=t;document.getElementById('sonBtn2').innerText=t;if(sonOn)v.play();}
+function closeCode(){document.getElementById('codeBox').style.display='none';}
+function checkCode(){let v=document.getElementById('codeInput').value.trim();if(v===SECRET_CODE||v==='2019'||v.toLowerCase()==='vorax'){document.getElementById('codeBox').style.display='none';document.getElementById('main').style.display='block';document.body.style.overflow='auto';localStorage.setItem('vorax_unlocked','1');toast('Accès OK');}else{toast('Code faux');}}
+function lockAgain(){document.getElementById('main').style.display='none';document.body.style.overflow='hidden';localStorage.removeItem('vorax_unlocked');}
+if(localStorage.getItem('vorax_unlocked')==='1'){document.getElementById('main').style.display='block';document.body.style.overflow='auto';}
+function load(){let d=JSON.parse(localStorage.getItem('vorax_final')||'null')||data;document.getElementById('displayNum').innerText=d.number;document.getElementById('editNum').value=d.number;renderMails(d.mails);}
+function renderMails(s){let l=s.split(',').map(x=>x.trim()).filter(Boolean);let h='';l.forEach(m=>{h+=`<div class="mail-row"><span>${m}</span><button class="btnCopy" onclick="copyM('${m}')">Copier</button></div>`;});document.getElementById('mailList').innerHTML=h;}
+function toggleEdit(){let d=document.getElementById('displayNum');let e=document.getElementById('editNum');if(e.style.display==='none'||e.style.display===''){e.style.display='block';d.style.display='none';e.focus();}else{saveNum();}}
+function saveNum(){let e=document.getElementById('editNum');let d=document.getElementById('displayNum');let v=e.value.trim();if(v){d.innerText=v;let st=JSON.parse(localStorage.getItem('vorax_final')||'null')||data;st.number=v;localStorage.setItem('vorax_final',JSON.stringify(st));}e.style.display='none';d.style.display='block';}
+function setType(t){currentType=t;document.querySelectorAll('.tab').forEach(x=>{x.classList.remove('active');x.classList.add('inactive');});document.getElementById('t'+t).classList.remove('inactive');document.getElementById('t'+t).classList.add('active');}
+function copyM(txt){navigator.clipboard.writeText(txt);toast('Copié');}
+function copyText1(){navigator.clipboard.writeText(document.getElementById('text1').value);toast('Copié');}
+function copyText2(){navigator.clipboard.writeText(document.getElementById('text2').value);toast('Copié');}
+function openWA(){window.open(data.wa,'_blank');}
+function toast(t){let e=document.getElementById('toast');e.innerText=t;e.style.display='block';setTimeout(()=>e.style.display='none',2000);}
+load();
+</script>
+</body>
+</html>
